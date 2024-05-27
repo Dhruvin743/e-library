@@ -2,6 +2,7 @@ import React, { useRef } from "react";
 import signupStyle from "./Signup.module.css";
 import { NavLink } from "react-router-dom";
 import { Button } from "react-bootstrap";
+import { current } from "@reduxjs/toolkit";
 
 function Signup() {
 	const sgEmail = useRef();
@@ -51,8 +52,9 @@ function Signup() {
 							Password
 						</label>
 						<span className='col-1 text-center'>:</span>
-						<div className='col-7'>
+						<div className='col-7 position-relative'>
 							<input
+								className='w-100'
 								style={{
 									// backgroundColor: `var(--color-surface-mixed-200)`,
 									border: `0px none transparent`,
@@ -65,7 +67,29 @@ function Signup() {
 								id='sgPass'
 								ref={sgPass}
 							/>
-                            <button type="button"><img src="" alt="" /></button>
+							<button
+								className='border-0 position-absolute top-0 end-0 '
+								type='button'
+								style={{ backgroundColor: "transparent" }}
+								onClick={() => {
+									if (
+										sgPass.current.getAttribute("type") ===
+										"password"
+									) {
+										sgPass.current.setAttribute(
+											"type",
+											"text"
+										);
+									} else {
+										sgPass.current.setAttribute(
+											"type",
+											"password"
+										);
+									}
+								}}
+							>
+								<i class='fa-solid fa-eye-slash'></i>
+							</button>
 						</div>
 						<label
 							className='col-3 text-end'
@@ -77,20 +101,46 @@ function Signup() {
 							Confirm Password
 						</label>
 						<span className='col-1 text-center'>:</span>
-						<input
-							className='col-7'
-							style={{
-								// backgroundColor: `var(--color-surface-mixed-200)`,
-								border: `0px none transparent`,
-								backgroundColor: `transparent`,
-								borderBottomWidth: "2px",
-								borderBottomStyle: "solid",
-								borderBottomColor: "black",
-							}}
-							type='password'
-							id='sgRePass'
-							ref={sgRePass}
-						/>
+						<div className='col-7 position-relative'>
+							<input
+								className='w-100'
+								style={{
+									// backgroundColor: `var(--color-surface-mixed-200)`,
+									border: `0px none transparent`,
+									backgroundColor: `transparent`,
+									borderBottomWidth: "2px",
+									borderBottomStyle: "solid",
+									borderBottomColor: "black",
+								}}
+								type='password'
+								id='sgRePass'
+								ref={sgRePass}
+							/>
+							<button
+								className='border-0 position-absolute top-0 end-0 '
+								type='button'
+								style={{ backgroundColor: "transparent" }}
+								onClick={() => {
+									if (
+										sgRePass.current.getAttribute(
+											"type"
+										) === "password"
+									) {
+										sgRePass.current.setAttribute(
+											"type",
+											"text"
+										);
+									} else {
+										sgRePass.current.setAttribute(
+											"type",
+											"password"
+										);
+									}
+								}}
+							>
+								<i class='fa-solid fa-eye-slash'></i>
+							</button>
+						</div>
 					</div>
 					<div className='row text-center mb-5 pb-4 mt-5'>
 						<Button
