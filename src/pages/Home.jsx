@@ -1,91 +1,126 @@
 import React from "react";
 import homeStyle from "./Home.module.css";
-import Badge from "react-bootstrap/Badge";
 import Button from "react-bootstrap/Button";
-import { Stack } from "react-bootstrap";
 import Card from "./Card";
+import { NavLink } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 function Home() {
 	return (
 		<>
 			<div className={homeStyle.main}>
-				<div>
-					<nav
-						className='navbar navbar-expand-lg p-2.5 rounded-bottom'
-						style={{
-							backgroundColor: `var(--color-surface-mixed-100)`,
-						}}
-					>
-						<div className='container-fluid mx-4'>
-							<a
-								className='navbar-brand p-0 ms-5 text-size-'
-								style={{
-									color: `var(--color-primary-100)`,
-									fontWeight: 1000,
-									fontSize: "1.5em",
-								}}
-								href='/'
+				<nav
+					className='navbar navbar-expand-lg px-2.5 pt-3 pb-0 rounded-bottom'
+					style={{
+						backgroundColor: `var(--color-surface-mixed-100)`,
+					}}
+				>
+					<div className='    container-fluid mx-4'>
+						<a
+							className='navbar-brand p-0 ms-5 text-size-'
+							style={{
+								color: `var(--color-primary-100)`,
+								fontWeight: 1000,
+								fontSize: "1.8em",
+							}}
+							href='/'
+						>
+							E-Library
+						</a>
+						<button
+							className='navbar-toggler'
+							type='button'
+							data-bs-toggle='collapse'
+							data-bs-target='#navbarSupportedContent'
+							aria-controls='navbarSupportedContent'
+							aria-expanded='false'
+							aria-label='Toggle navigation'
+						>
+							<span className='navbar-toggler-icon'></span>
+						</button>
+						<div
+							className='collapse navbar-collapse'
+							id='navbarSupportedContent'
+						>
+							<form
+								className='d-flex mx-auto ps-3 w-50 '
+								role='search'
 							>
-								E-Library
-							</a>
-							<button
-								className='navbar-toggler'
-								type='button'
-								data-bs-toggle='collapse'
-								data-bs-target='#navbarSupportedContent'
-								aria-controls='navbarSupportedContent'
-								aria-expanded='false'
-								aria-label='Toggle navigation'
-							>
-								<span className='navbar-toggler-icon'></span>
-							</button>
-							<div
-								className='collapse navbar-collapse'
-								id='navbarSupportedContent'
-							>
-								<form
-									className='d-flex mx-auto ps-3 w-50 '
-									role='search'
+								<input
+									className='form-control ms-5 placeholder-glow'
+									type='search'
+									placeholder='Search'
+									aria-label='Search'
+									style={{
+										backgroundColor: `var(--color-surface-mixed-400)`,
+										color: `black`,
+										fontWeight: 600,
+									}}
+								/>
+							</form>
+							<div>
+								<span
+									className={`${useSelector(
+										(state) =>
+											state.showLoginBtnReducer.value
+									)} fs-5 fw-bold`}
 								>
-									<input
-										className='form-control ms-5 placeholder-glow'
-										type='search'
-										placeholder='Search'
-										aria-label='Search'
-										style={{
-											backgroundColor: `var(--color-surface-mixed-400)`,
-											color: `black`,
-											fontWeight: 600,
-										}}
-									/>
-								</form>
-								<div className='d-inline-flex flex-row justify-content-evenly align-items-center'>
-									<span className='fs-5 fw-bold'>Log in</span>
-									<span className='mx-4 fs-5 fw-bold'>
-										Sign up
-									</span>
-									<div
-										className='d-flex justify-content-center align-items-center rounded-circle'
-										style={{
-											width: "30px",
-											height: "30px",
-											backgroundColor: `var(--color-primary-100)`,
-										}}
-									>
-										<a
-											href='http://'
+									<NavLink to={"/login"}>
+										<Button
+											className='border-0'
 											style={{
+												backgroundColor: `var(--color-primary-100)`,
 												color: `black`,
+												fontWeight: `700`,
 											}}
 										>
-											<i class='fa-solid fa-user'></i>
-										</a>
-									</div>
+											Log in
+										</Button>
+									</NavLink>
+								</span>
+								<span
+									className={`${useSelector(
+										(state) =>
+											state.showLoginBtnReducer.value
+									)} mx-4 fs-5 fw-bold`}
+								>
+									<NavLink to={"/signup"}>
+										<Button
+											className='border-0'
+											style={{
+												backgroundColor: `var(--color-primary-100)`,
+												color: `black`,
+												fontWeight: `700`,
+											}}
+										>
+											Sign up
+										</Button>
+									</NavLink>
+								</span>
+								<div
+									className={`${useSelector(
+										(state) =>
+											state.showProfileIconReducer.value
+									)} justify-content-center align-items-center rounded-circle`}
+									style={{
+										width: "30px",
+										height: "30px",
+										backgroundColor: `var(--color-primary-100)`,
+									}}
+								>
+									<a
+										href='/'
+										style={{
+											color: `black`,
+										}}
+									>
+										<i className='fa-solid fa-user'></i>
+									</a>
 								</div>
 							</div>
 						</div>
-					</nav>
-				</div>
+					</div>
+				</nav>
 
 				{/*//? bottom part */}
 				<div className={homeStyle.contentbar}>
@@ -118,13 +153,7 @@ function Home() {
 						</div>
 
 						{/*//? middle section part */}
-						<div
-							className={homeStyle.librarysection}
-							style={{
-								overflow: "scroll",
-								scrollbarWidth: "none",
-							}}
-						>
+						<div className={homeStyle.librarysection}>
 							<Card />
 							<Card />
 							<Card />
@@ -142,16 +171,33 @@ function Home() {
 								className={`d-flex flex-column justify-content-center align-items-between ${homeStyle.socialTag}`}
 							>
 								<div>
-									<img src='facebook.png' alt='' />
+									<NavLink
+										target='_'
+										to={"https://facebook.com"}
+									>
+										<img src='facebook.png' alt='' />
+									</NavLink>
 								</div>
 								<div>
-									<img src='instagram.jpg' alt='' />
+									<NavLink
+										target='_'
+										to={"https://instagram.com"}
+									>
+										<img src='instagram.jpg' alt='' />
+									</NavLink>
 								</div>
 								<div>
-									<img src='twitter.png' alt='' />
+									<NavLink target='_' to={"https://x.com/"}>
+										<img src='twitter.png' alt='' />
+									</NavLink>
 								</div>
 								<div>
-									<img src='discord.png' alt='' />
+									<NavLink
+										target='_'
+										to={"https://discord.com/"}
+									>
+										<img src='discord.png' alt='' />
+									</NavLink>
 								</div>
 							</div>
 						</div>

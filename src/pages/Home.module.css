@@ -1,5 +1,5 @@
-input::placeholder {
-    color: var(--color-primary-100);
+.islogin {
+    display: none;
 }
 
 .main {
@@ -33,15 +33,20 @@ input::placeholder {
 
 .menusection {
     width: 20%;
+    /* height: 90%; */
+    margin-top: 20px;
+    margin-bottom: 20px;
     background-color: var(--color-surface-mixed-400);
     font-weight: 500;
-    border-radius: 10px;
+    border-top-right-radius: 20px;
+    border-bottom-right-radius: 20px;
 }
 
 .menubtns {
     height: 60px;
-    background-color: var(--color-surface-mixed-300);
-    color: black;
+    background-color: var(--color-surface-mixed-600);
+    color: var(--color-primary-100);
+    font-weight: bold;
 }
 
 .menusection ul {
@@ -66,22 +71,28 @@ input::placeholder {
 
 .librarysection {
     width: 70%;
-    padding-top: 20px;
-    padding-bottom: 20px;
+    margin-top: 1rem;
+    margin-bottom: 20px;
     display: flex;
     flex-wrap: wrap;
-    row-gap: 20px;
+    row-gap: 24px;
     column-gap: 60px;
     justify-content: center;
     background-color: var(--color-surface-mixed-100);
-    overflow: hidden;
+    overflow: scroll;
+    scrollbar-width: none;
+    scroll-behavior: smooth;
+    background-clip: padding-box;
     border-radius: 10px;
 }
 
 .socialsection {
     width: 10%;
+    margin-top: 20px;
+    margin-bottom: 20px;
     background-color: var(--color-surface-mixed-400);
-    border-radius: 10px;
+    border-top-left-radius: 20px;
+    border-bottom-left-radius: 20px;
 }
 
 .socialTag {
@@ -99,7 +110,7 @@ input::placeholder {
     overflow: hidden;
 }
 
-.socialTag div{
+.socialTag div {
     margin: 0px;
     padding: 0px;
     /* background-color: bisque; */
@@ -108,6 +119,6 @@ input::placeholder {
     /* padding-left: 10px; */
 }
 
-.socialTag div img{
+.socialTag div img {
     height: 100%;
 }
