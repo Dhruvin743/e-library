@@ -1,75 +1,55 @@
 import React from "react";
+import { useDispatch } from "react-redux";
+import { NavLink, useNavigate } from "react-router-dom";
+import { showDetail } from "../store/reducers/exploreSlice";
 
-function Card() {
+function Card({ imgsrc, cardtitle, isNew, bookid }) {
+	// console.log(bookid);
+	if (cardtitle.length > 18) {
+		cardtitle = `${cardtitle.slice(0, cardtitle.indexOf(" ", 18))}...`;
+	}
+	const dispatch = useDispatch();
+	const navigate = useNavigate();
 	return (
 		<>
 			<div
-				className='card m-20 text-light rounded-4 text-center align-items-center'
+				className='card mx-3 py-2 text-light rounded-3 text-center align-items-center'
 				style={{
-					width: "16rem",
-					height: "20rem",
+					width: "12rem",
+					height: "14rem",
 					backgroundColor: `var(--color-surface-mixed-400)`,
+				}}
+				onClick={() => {
+					// dispatch(showDetail(bookid));
+					navigate(`/library/bookdetails/${bookid}?q=${imgsrc}`);
 				}}
 			>
 				<img
-					className='h-50 w-50 text-center'
+					className='h-75 w-75 text-center'
 					// src='https://source.unsplash.com/random/900x700/?code,book,bookopen'
-					src='openBook.png'
-					alt=''
+					src={imgsrc ? `https://covers.openlibrary.org/b/id/${imgsrc}-M.jpg` : "/openBook.png"}
+					style={{ objectFit: "contain" }}
 				/>
 				<div
-					className='card-body'
+					className='card-body p-1 d-flex align-items-center'
 					style={{
-						height: "30%",
+						height: "20%",
 						overflow: "scroll",
 						scrollbarWidth: "none",
 					}}
 				>
-					<h5
-						className='card-title d-inline-flex flex-row'
-						style={{ color: `var(--color-text)` }}
-					>
-						Card title
-						<span
-							className='badge ms-2'
-							style={{
-								backgroundColor: `var(--color-primary-100)`,
-								color: `var(--color-surface-mixed-600)`,
-							}}
-						>
-							New
-						</span>
+					<h5 className='card-title d-inline-flex mb-0' style={{ color: `var(--color-text)` }}>
+						{cardtitle || "cardtitle"}
 					</h5>
-					<p
-						className='card-text'
+					<span
+						className={`${isNew} badge m-2 fs-6 p-2 position-absolute top-0 end-0`}
 						style={{
-							color: `var(--color-primary-100)`,
+							backgroundColor: `var(--color-primary-100)`,
+							color: `var(--color-surface-mixed-600)`,
 						}}
 					>
-						Some quick example text to build on the card title and
-						make up the bulk of the card's content.
-					</p>
-				</div>
-				<div
-					className='card-footer bg-transparent border-0'
-					style={
-						{
-							// backgroundColor: `var(--color-surface-mixed-200)`,
-						}
-					}
-				>
-					<a
-						href='/'
-						className='btn w-100'
-						style={{
-							backgroundColor: `var(--color-primary-500)`,
-							color: `black`,
-							fontWeight: 700,
-							fontSize: "1.2em",
-						}}
-					>
-						Explore
-					</a>
+						New
+					</span>
 				</div>
 			</div>
 		</>

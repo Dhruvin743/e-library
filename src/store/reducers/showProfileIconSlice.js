@@ -2,7 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const showProfileIconSlice = createSlice({
 	name: "showProfileIcon",
-	initialState: { value: "d-none" },
+	initialState: { value: false },
 	reducers: {
 		// actions are passed argument in function
 		showIcon: (state, actions) => {
@@ -12,7 +12,7 @@ const showProfileIconSlice = createSlice({
 			// setTimeout(() => {
 			// }, 2000);
 			// console.log(state);
-			state.value = actions.payload ? "d-flex" : "d-none";
+			state.value = actions.payload;
 		},
 	},
 });

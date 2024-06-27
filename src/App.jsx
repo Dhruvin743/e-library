@@ -1,11 +1,11 @@
-import { Route, Routes } from "react-router-dom";
+import { Route, Router, Routes } from "react-router-dom";
 import "./App.css";
 import Home from "./pages/Home";
 import Login from "./pages/Login";
 import Signup from "./pages/Signup";
 import { useDispatch } from "react-redux";
 import { showIconAsync, showIcon } from "./store/reducers/showProfileIconSlice";
-import { showBtn } from "./store/reducers/showLoginBtnSlice";
+import Redirector from "./components/Redirector";
 
 function App() {
 	const dispatch = useDispatch();
@@ -14,7 +14,7 @@ function App() {
 
 	return (
 		<>
-			<div>App page</div>
+			{/* <div>App page</div>
 			<button
 				type='button'
 				onClick={() => {
@@ -26,11 +26,12 @@ function App() {
 				}}
 			>
 				Show
-			</button>
+			</button> */}
 			<Routes>
-				<Route path='/' element={<Home />}></Route>
+				<Route path='/library/*' element={<Home />}></Route>
 				<Route path='/login' element={<Login />}></Route>
 				<Route path='/signup' element={<Signup />}></Route>
+				<Route path='*' element={<Redirector />} />
 			</Routes>
 		</>
 	);
