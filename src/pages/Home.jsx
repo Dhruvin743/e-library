@@ -1,17 +1,16 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import homeStyle from "./stylesheets/home.module.css";
 import Button from "react-bootstrap/Button";
-import { NavLink, Route, Routes, json, useNavigate } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { NavLink, Route, Routes, useNavigate } from "react-router-dom";
 import BookMenu from "../components/BookMenu";
 import BookDetails from "../components/BookDetails";
 import { useCookies } from "react-cookie";
 import FavBookMenu from "../components/FavBookMenu";
 import RentBookMenu from "../components/RentBookMenu";
 import BMarkBookMenu from "../components/BMarkBookMenu";
+import PdfVeiwer from "../components/PdfVeiwer";
 
 function Home() {
-	const isProIcoVis = useSelector((state) => state.showProfileIconReducer.value);
 	const [cookies, setCookie, removeCookie] = useCookies();
 	const nav = useNavigate();
 
@@ -159,9 +158,10 @@ function Home() {
 						{/*//? middle section part */}
 						<div className={`${homeStyle.librarysection} px-5`}>
 							<Routes>
-								<Route path='/favorite' element={<FavBookMenu />} />
-								<Route path='/collection' element={<RentBookMenu />} />
-								<Route path='/wishlist' element={<BMarkBookMenu />} />
+								<Route path='favorite' element={<FavBookMenu />} />
+								<Route path='collection' element={<RentBookMenu />} />
+								<Route path='wishlist' element={<BMarkBookMenu />} />
+								<Route path='pdf' element={<PdfVeiwer />} />
 								<Route path='/' element={<BookMenu />} />
 								<Route path='bookdetails/:bookid' element={<BookDetails />} />
 							</Routes>

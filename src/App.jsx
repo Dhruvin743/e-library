@@ -4,13 +4,10 @@ import Home from "./pages/Home";
 import Login from "./pages/Login";
 import Signup from "./pages/Signup";
 import { useDispatch } from "react-redux";
-import { showIconAsync, showIcon } from "./store/reducers/showProfileIconSlice";
 import Redirector from "./components/Redirector";
+import PdfVeiwer from "./components/PdfVeiwer";
 
 function App() {
-	const dispatch = useDispatch();
-	let showiconFlag = false;
-	let showLoginFlag = true;
 
 	return (
 		<>
@@ -31,6 +28,7 @@ function App() {
 				<Route path='/library/*' element={<Home />}></Route>
 				<Route path='/login' element={<Login />}></Route>
 				<Route path='/signup' element={<Signup />}></Route>
+				{/* <Route path='/pdf' element={<PdfVeiwer />}></Route> */}
 				<Route path='*' element={<Redirector />} />
 			</Routes>
 		</>

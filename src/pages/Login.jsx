@@ -2,9 +2,8 @@ import React, { useEffect, useRef } from "react";
 import loginStyle from "./stylesheets/login.module.css";
 import { NavLink, useNavigate } from "react-router-dom";
 import { Button } from "react-bootstrap";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { showIcon } from "../store/reducers/showProfileIconSlice";
-import { useCookies } from "react-cookie";
 
 function Login() {
 	const lgEmail = useRef();
@@ -29,15 +28,15 @@ function Login() {
 				<div
 					className={`d-flex flex-column fs-5 justify-content-end align-items-center rounded-4 ${loginStyle.loginBox}`}
 				>
-					<div className='row gx-0 gy-3 pe-3 justify-content-center align-items-center'>
+					<div className='row gx-0 gy-3 pe-0 justify-content-center align-items-center'>
 						<span
-							className='col-12 m-0 fs-1 ms-3 mb-3 fw-bold text-center'
+							className='col-12 m-0 fs-1 mx-auto mb-3 fw-bold text-center'
 							style={{ color: `var(--color-primary-100)` }}
 						>
 							E-Library
 						</span>
 						<label
-							className='col-3 text-end'
+							className='col-2 text-start'
 							style={{
 								color: `var(--color-text)`,
 							}}
@@ -47,7 +46,7 @@ function Login() {
 						</label>
 						<span className='col-1 text-center'>:</span>
 						<input
-							className='col-7'
+							className='col-8'
 							style={{
 								border: `0px none transparent`,
 								backgroundColor: `transparent`,
@@ -55,12 +54,12 @@ function Login() {
 								borderBottomStyle: "solid",
 								borderBottomColor: "black",
 							}}
-							type='text'
+							type='email'
 							id='lgEmail'
 							ref={lgEmail}
 						/>
 						<label
-							className='col-3 text-end'
+							className='col-2 text-start'
 							style={{
 								color: `var(--color-text)`,
 							}}
@@ -69,7 +68,7 @@ function Login() {
 							Password
 						</label>
 						<span className='col-1 text-center'>:</span>
-						<div className='col-7 position-relative'>
+						<div className='col-8 position-relative'>
 							<input
 								className='w-100'
 								style={{

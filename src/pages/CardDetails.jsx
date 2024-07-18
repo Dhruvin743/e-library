@@ -1,6 +1,4 @@
 import React, { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { showDetail } from "../store/reducers/exploreSlice";
 import { useNavigate, useParams, useSearchParams } from "react-router-dom";
 import Bookmark from "../assets/BookmarkSvg";
 import HeartSvg from "../assets/HeartSvg";
@@ -9,9 +7,10 @@ import BackSvg from "../assets/BackSvg";
 function CardDetails() {
 	// const dispatch = useDispatch();
 	const nav = useNavigate();
+	// for book id
 	const { bookid } = useParams();
+	// for image id
 	const params = new URLSearchParams(document.location.search);
-	console.log(params.get("q"));
 	const [isMarked, setIsMarked] = useState({ fav: false, book: false, borrow: false });
 	const [bookDetail, setBookDetail] = useState({ gotit: "" });
 	useEffect(() => {
@@ -82,7 +81,10 @@ function CardDetails() {
 							className='w-100 h-100'
 						/>
 					</div>
-					<div className='d-flex justify-content-center align-items-center' style={{ width: "100%", height: "30%" }}>
+					<div
+						className='d-flex justify-content-center align-items-center gap-2'
+						style={{ width: "100%", height: "30%" }}
+					>
 						<button
 							className='px-3 py-2 rounded-2 fs-3 font-monospace border-1 border-top-0 border-start-0 border-end border-bottom border-black'
 							type='button'
@@ -114,8 +116,24 @@ function CardDetails() {
 								}
 							}}
 						>
-							{isMarked.borrow ? "Borrowed" : "Borrow"}
+							{isMarked.borrow ? "Return" : "Borrow"}
 						</button>
+						{isMarked.borrow && (
+							<button
+								className='px-3 py-2 rounded-2 fs-3 font-monospace border-1 border-top-0 border-start-0 border-end border-bottom border-black'
+								type='button'
+								style={{
+									backgroundColor: `var(--color-primary-500)`,
+									color: `black`,
+									fontWeight: `700`,
+								}}
+								onClick={async () => {
+									nav("/library/pdf");
+								}}
+							>
+								Read
+							</button>
+						)}
 					</div>
 				</div>
 
@@ -151,6 +169,7 @@ function CardDetails() {
 										credentials: "include",
 									});
 									const res = await data.json();
+									console.log(res);
 									if (res.code) {
 										nav("/login");
 									} else {

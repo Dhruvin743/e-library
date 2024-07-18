@@ -96,7 +96,6 @@ function BookMenu() {
 					type='search'
 					placeholder='Search'
 					style={{
-						// width:"0px",
 						backgroundColor: `var(--color-surface-mixed-400)`,
 						borderWidth: "0px 3px",
 						borderStyle: "solid solid",
@@ -123,7 +122,6 @@ function BookMenu() {
 			</form>
 			<div className={`${homeStyle.library} d-flex flex-wrap mx-auto px-4 row-gap-4 justify-content-start`}>
 				{bookList.map((v, i) => {
-					// console.log(v);
 					return (
 						<Card
 							key={`card${i}`}

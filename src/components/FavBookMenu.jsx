@@ -12,17 +12,6 @@ function FavBookMenu() {
 	const searchData = useSelector((state) => state.rSearch.value);
 	const searchTag = useRef();
 	const dispatch = useDispatch();
-	// useEffect(() => {
-	// 	fetch("https://openlibrary.org/trending/daily.json?limit=12&page=1")
-	// 		.then((data) => {
-	// 			return data.json();
-	// 		})
-	// 		.then((res) => {
-	// 			console.log(res);
-	// 			localStorage.setItem("mybooks", JSON.stringify(res.works));
-	// 			setbookList(res.works);
-	// 		});
-	// }, []);
 
 	useEffect(() => {
 		const pull = async () => {

@@ -6,6 +6,7 @@ const bodyParser = require("body-parser");
 const cors = require("cors");
 const cookieParser = require("cookie-parser");
 const response = require("response-time");
+const path = require("path");
 // const uuidv6 = require("uuid").v6;
 // const store = new session.MemoryStore();
 const sessionModel = require("../schema/sessionSchema");
@@ -101,6 +102,18 @@ router.get("/logincheck", redirectToHome, (req, res) => {
 	res.send({ code: 0 });
 });
 
+router.get("/getpdf", (req, res) => {
+	let search = req.cookies[SESS_NAME];
+	console.log(search);
+	if (search) {
+		const filepath = path.join(__dirname, "../public", "sample-3pp.pdf");
+		res.status(200);
+		res.sendFile(filepath);
+	} else {
+		res.status(403).send();
+	}
+});
+
 router.post("/login", async (req, res) => {
 	const data = { uEmail: req.body.email, uPass: req.body.pass };
 	const out = await userModel.findOne(data);
@@ -135,8 +148,8 @@ router.post("/signup", async (req, res) => {
 
 router.get("/favoritebooks", redirectToHome, async (req, res) => {
 	try {
-    const data = await userModel.findById({ _id: req.otherParm.uSess[0][req.search] }, { uBooks: 1, _id: 0 });
-    res.send({ data: data.uBooks.filter((v) => v.bIsFavorite) });
+		const data = await userModel.findById({ _id: req.otherParm.uSess[0][req.search] }, { uBooks: 1, _id: 0 });
+		res.send({ data: data.uBooks.filter((v) => v.bIsFavorite) });
 	} catch (error) {
 		console.log(error.message);
 		res.send({ code: 1 });
@@ -170,7 +183,7 @@ router.get("/home", async (req, res) => {
 		const out = (await sessionModel.findOne({ [`uSess.${search}`]: { $exists: true } })) || {};
 		if (out) {
 			try {
-				fetch("https://openlibrary.org/trending/daily.json?limit=12&page=1")
+				fetch("https://openlibrary.org/trending/daily.json?limit=24&page=1")
 					.then((data) => {
 						return data.json();
 					})
@@ -229,6 +242,7 @@ router.get("/search/:find", async (req, res) => {
 });
 
 router.post("/favorite", async (req, res) => {
+	console.log("favoooo");
 	let search = req.cookies[SESS_NAME];
 	if (search) {
 		search = String(search).split(".")[0].split(":")[1];
@@ -243,7 +257,7 @@ router.post("/favorite", async (req, res) => {
 					out[0]
 				);
 				await user.save();
-				res.send({ code: 0 });
+				res.send({ code: 0, bIsFavorite: out[0].bIsFavorite });
 			} else {
 				user.uBooks.push({
 					book_id: req.body.bookid,
@@ -253,7 +267,7 @@ router.post("/favorite", async (req, res) => {
 					bIsFavorite: true,
 				});
 				await user.save();
-				return res.send({ code: 0 });
+				return res.send({ code: 0, bIsFavorite: true });
 			}
 		} else {
 			res.send({ code: 1 });
